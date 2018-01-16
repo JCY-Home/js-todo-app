@@ -113,11 +113,17 @@ var app = (function() {
 	}
 
 	function removeTask(e) {
-		var $target = $(e.target),
+		var $thisTask,
+			$target = $(e.target),
 		    $siblingTextareaId = $target.siblings('textarea').attr('id'),
 		    idNumber = $siblingTextareaId.slice(5);
 
-		$tasks.splice($.inArray($tasks[idNumber - 1], $tasks), 1);
+		$.each($tasks, (index) => {
+			if($tasks[index].val === Number(idNumber)) {
+				$thisTask = $tasks[index];
+			}
+		});
+		$tasks.splice($.inArray($thisTask, $tasks), 1);
 
 		$target.parent().remove();
 	}
