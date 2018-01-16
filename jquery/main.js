@@ -58,7 +58,9 @@ var app = (function() {
 			$textArea.keyup(() => {
 				// Prevents DOM text from updating after every keystroke
 				clearTimeout(timeout);
-				timeout = setTimeout(() => { updateTask(taskObject.val, $textArea.val()); }, 500);
+				timeout = setTimeout(() => {
+					updateTask(taskObject.val, $textArea.val());
+				}, 700);
 			});
 			// Build task lists
 			$taskList.append($container);
