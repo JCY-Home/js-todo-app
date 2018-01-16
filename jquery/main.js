@@ -68,10 +68,14 @@ var app = (function() {
 	}
 
 	function updateTask(objectVal, newText) {
-		var $thisTaskTextarea = $('textarea[id="task-' + objectVal + '"]');
+		var $thisTask,
+			$thisTaskTextarea = $('textarea[id="task-' + objectVal + '"]');
 
 		// Sets data array text
-		$tasks[(objectVal - 1)].task = newText;
+		$.each($tasks, (index) => {
+			if($tasks[index].val === objectVal) { $thisTask = $tasks[index]; }
+		});
+		$thisTask.task = newText;
 		// Sets DOM text
 		$thisTaskTextarea.text(() => { return newText; });
 	}
