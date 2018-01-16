@@ -18,7 +18,7 @@
 - Enter key == click in the 'create task' and 'search' fields,
   but is disabled in the task fields
 
-- Deleting all text from a task will cause the DOM to show '*blank*' for 
+- Deleting all text from a task will cause the DOM to show '\*blank\*' for 
   that task, even though there's no text in the browser window. This is a necessary
   placeholder, since editing text automatically filters out empty child nodes.
   If the task is marked complete in this state, it will complete normally
