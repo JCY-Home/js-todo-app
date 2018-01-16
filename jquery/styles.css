@@ -1,0 +1,183 @@
+/**
+* Styles for Vanilla JS To-Do App
+* */
+
+body {
+	font-family: "Fira Sans", sans-serif;
+	box-sizing: border-box;
+}
+.app-wrap {
+	background-color: #efefef;
+	width: 80vw;
+	height: auto;
+	margin: 20px auto;
+	border: 1px solid #ccc;
+}
+
+/**
+* Header section
+* */
+#header, #footer {
+	padding-left: 20px;
+}
+#header {
+	margin-bottom: 60px;
+}
+.title-wrap {
+	margin-bottom: 60px;
+}
+#header h1 {
+	font-family: "Space Mono", monospace;
+	font-size: 55px;
+	line-height: 55px;
+	margin-bottom: 0;
+}
+.new-task-wrap {
+	position: relative;
+}
+.new-field {
+	font-family: "Fira Sans";
+	font-size: 28px;
+	resize: none;
+	border: none;
+}
+.new-field:focus,
+.new-field:active {
+	outline: none;
+}
+a.tr-button {
+	display: block;
+	color: #000;
+	background-color: #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	width: 150px;
+	text-decoration: none;
+	border: 3px solid #000;
+	margin-top: 5px;
+	padding: 10px 15px;
+	transition-property: color, background-color;
+	transition-duration: 300ms;
+	transition-timing-function: ease;
+}
+a.tr-button:hover {
+	color: #fff;
+	background-color: #000;
+}
+
+/**
+* Main section
+* */
+#main {
+	margin-bottom: 60px;
+}
+.hidden {
+	display: none !important;
+}
+#task-list {
+	/*min-height: 150px;*/
+	padding-left: 0;
+}
+#completed-list {
+	margin-top: 30px;
+	padding-top: 30px;
+	border-top: 1px solid #ccc;
+}
+.task {
+	position: relative;
+	font-size: 20px;
+	background-color: white;
+	height: 45px;
+	padding-left: 20px;
+	margin-bottom: 5px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.tr-checkbox {
+	display: inline-block;
+    position: relative;
+	width: 25px;
+    height: 25px;
+    border: 3px solid #ccc;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.checkmark {
+	display: inline-block;
+	position: relative;
+	width: 35px;
+	height: 44px;
+	margin-right: 11px;
+    vertical-align: middle;
+    top: -10px;
+    left: -2px;
+}
+.task textarea {
+	position: relative;
+	font-family: "Fira Sans";
+	font-size: 28px;
+	resize: none;
+	border: none;
+	top: 50%;
+	transform: translateY(-50%);
+}
+#completed-list .task textarea {
+	color: #cacaca;
+	text-decoration: line-through #000;
+}
+.task textarea:focus,
+.task textarea:active {
+	outline: none;
+}
+.remove-button {
+	display: inline;
+	position: absolute;
+	color: #ff0000;
+	font-size: 15px;
+	font-weight: bold;
+	right: 5vw;
+	top: 50%;
+	transform: translateY(-50%);
+	border: 2px solid #000;
+	border-radius: 20px;
+	padding: 2px 9px;
+	cursor: pointer;
+	transition-property: color, background-color, border-color;
+	transition-duration: 300ms;
+	transition-timing-function: ease;
+}
+.remove-button:hover {
+	color: #fff;
+	background-color: #ff0000;
+	border-color: #ff0000;
+}
+
+/**
+* Footer section
+* */
+#footer {
+	position: relative;
+	bottom: 2px;
+	left: 0;
+	padding-bottom: 20px;
+}
+.fail-text {
+	opacity: 0;
+	font-size: 20px;
+	color: #ff0000;
+	font-weight: bold;
+}
+input {
+	font-size: 22px;
+	padding: 2px;
+}
+input:focus {
+	border-color: #000;
+	outline: none;
+}
+#search-button {
+	font-size: 21px;
+    font-family: "Fira Sans", sans-serif;
+    text-transform: uppercase;
+    vertical-align: top;
+}

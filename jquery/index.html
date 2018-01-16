@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>jQuery To-Do App</title>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Space+Mono" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+	<div class="app-wrap">
+		<section id="header">
+			<div class="title-wrap">
+				<h1 title="written by Justin Yarbrough">To-Do<br>List App</h1>
+				<p>(Version 2.1.0 - jQuery)</p>
+		    </div>
+			<div class="new-task-wrap">
+				<textarea class="new-field" rows="1" cols="50" placeholder="Insert new task text here"></textarea>
+				<a class="tr-button" href="#" title="Create new task">Create new task</a>
+			</div>
+		</section> <!-- #header -->
+		<section id="main">
+			<div id="task-list">
+				<!-- incomplete tasks go here -->
+			</div>
+			<div id="completed-list">
+				<!-- completed tasks go here -->
+			</div>
+		</section> <!-- #main -->
+		<section id="footer">
+			<div class="search-wrap">
+				<p class="fail-text">No match found!</p>
+				<input type="text" id="search-bar" name="search" placeholder="Search for a task..." size="50"/>
+				<button id="search-button">Search</button>
+			</div>
+		</section> <!-- #footer -->
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</body>
+
+</html>
