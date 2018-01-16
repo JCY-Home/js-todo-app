@@ -77,7 +77,7 @@ var app = (function() {
 		});
 		$thisTask.task = newText;
 		// Sets DOM text
-		$thisTaskTextarea.text(() => { return newText; });
+		$thisTaskTextarea.text(newText);
 	}
 
 	function newTask(taskString, bool) {
