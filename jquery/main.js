@@ -44,7 +44,7 @@ var app = (function() {
 		$removeButton = $('<div class="remove-button" title="Remove task">X</div>');
 
 		if(taskObject.complete) {
-			$textArea.prop('readonly', 'readonly');
+			$textArea.attr('readonly', 'readonly');
 		}
 
 		$container.append($checkbox, $checkmark, $textArea, $removeButton);
@@ -99,7 +99,7 @@ var app = (function() {
 		var $thisTask,
 			$target = $(e.target),
 		    $siblingTextarea = $target.siblings('textarea'),
-		    idNumber = $siblingTextarea.prop('id').slice(5);
+		    idNumber = $siblingTextarea.attr('id').slice(5);
 
 		$.each($tasks, (index) => {
 			if($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
@@ -113,7 +113,7 @@ var app = (function() {
 	function removeTask(e) {
 		var $thisTask,
 			$target = $(e.target),
-		    $siblingTextareaId = $target.siblings('textarea').prop('id'),
+		    $siblingTextareaId = $target.siblings('textarea').attr('id'),
 		    idNumber = $siblingTextareaId.slice(5);
 
 		$.each($tasks, (index) => {
