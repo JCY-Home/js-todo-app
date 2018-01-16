@@ -29,6 +29,6 @@
   takes a string and a Boolean value as optional arguments for the new task.
 
 - Dividing task definition and task creation into two separate functions was
-  a conscious decision. By exposing the newTask() in the API and having it
+  a conscious decision. By exposing newTask() in the API and having it
   call createTask(), users are able to make tasks with the API but not alter
   the process by which they're made.
