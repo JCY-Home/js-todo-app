@@ -7,9 +7,7 @@ var app = (function() {
 
 	var utils = (function() {
 		function preventEnterKey(e) {
-			if(e.keyCode === 10 || e.keyCode === 13) {
-				e.preventDefault();
-			}
+			if(e.keyCode === 10 || e.keyCode === 13) {e.preventDefault();}
 		}
 		return {
 			preventEnterKey: preventEnterKey
@@ -42,7 +40,7 @@ var app = (function() {
 		}
 
 		$textArea = $('<textarea id="task-' + taskObject.val + '" rows="1" cols="50" placeholder="Insert task name here..."></textarea>');
-		$textArea.text( () => { return taskObject.task; });
+		$textArea.text(() => { return taskObject.task; });
 		$removeButton = $('<div class="remove-button" title="Remove task">X</div>');
 
 		if(taskObject.complete) {
@@ -52,15 +50,15 @@ var app = (function() {
 		$container.append($checkbox, $checkmark, $textArea, $removeButton);
 
 		// Add event listeners to dynamic elements
-		$removeButton.click( (e) => { removeTask(e); });
+		$removeButton.click((e) => { removeTask(e); });
 
 		if(!taskObject.complete) {
-			$checkbox.click( (e) => { createTask(completeTask(e)); });
-			$textArea.keypress( (e) => { utils.preventEnterKey(e); });
-			$textArea.keyup( () => {
+			$checkbox.click((e) => { createTask(completeTask(e)); });
+			$textArea.keypress((e) => { utils.preventEnterKey(e); });
+			$textArea.keyup(() => {
 				// Prevents DOM text from updating after every keystroke
 				clearTimeout(timeout);
-				timeout = setTimeout( () => { updateTask(taskObject.val, $textArea.val()); }, 500);
+				timeout = setTimeout(() => { updateTask(taskObject.val, $textArea.val()); }, 500);
 			});
 			// Build task lists
 			$taskList.append($container);
@@ -75,20 +73,20 @@ var app = (function() {
 		// Sets data array text
 		$tasks[(objectVal - 1)].task = newText;
 		// Sets DOM text
-		$thisTaskTextarea.text( () => { return newText; });
+		$thisTaskTextarea.text(() => { return newText; });
 	}
 
 	function newTask(taskString, bool) {
-			$newField = $('.new-field'),
+	    var $newField = $('.new-field'),
 			newTaskObject = {'val': taskValInc, 'task': taskString || $newField.val(), 'complete': bool || false};
 
+		// Doesn't let new tasks be blank
 		if(newTaskObject.task === '') {
 			newTaskObject.task = 'New empty task';
 		}
 		$tasks.push(newTaskObject);
-
+		// Bracket notation gets raw DOM node from jQuery object
 		$newField[0].value = '';
-
 		incrementTaskCounter();
 		createTask(newTaskObject);
 	}
@@ -97,15 +95,11 @@ var app = (function() {
 		var $thisTask,
 			$target = $(e.target),
 		    $siblingTextarea = $target.siblings('textarea'),
-		    idNumber = $siblingTextarea.attr('id').slice(5),
-		    $completedList = $('#completed-list');
+		    idNumber = $siblingTextarea.attr('id').slice(5);
 
 		$.each($tasks, (index) => {
-			if($tasks[index].val === Number(idNumber)) {
-				$thisTask = $tasks[index];
-			}
+			if($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
 		});
-		
 		$thisTask.complete = true;
 		$target.parent().remove();
 
@@ -119,12 +113,11 @@ var app = (function() {
 		    idNumber = $siblingTextareaId.slice(5);
 
 		$.each($tasks, (index) => {
-			if($tasks[index].val === Number(idNumber)) {
-				$thisTask = $tasks[index];
-			}
+			if($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
 		});
+		// Remove task from data array
 		$tasks.splice($.inArray($thisTask, $tasks), 1);
-
+		// Remove it from DOM
 		$target.parent().remove();
 	}
 
@@ -134,33 +127,35 @@ var app = (function() {
 			$allTasks = $('.task'),
 		    $searchField = $('#search-bar'),
 		    $failText = $('.fail-text');
-
+		// Ignores capitalization
 		searchedItem = $tasks.filter( (index) => {
 			return $tasks[index].task.toUpperCase().indexOf($searchField.val().toUpperCase()) !== -1;
 		});
-
+		// Blank search removes filtered selection
 		if($searchField.val() === '') {
 			$allTasks.removeClass('hidden');
 		} else if(searchedItem.length < 1) {
+			// No match will show a text warning
 			$failText.animate({'opacity': 1}, 500);
 			clearTimeout(timeout);
-			timeout = setTimeout( () => { $failText.animate({'opacity': 0}, 500); }, 3000);
+			timeout = setTimeout(() => { $failText.animate({'opacity': 0}, 500); }, 3000);
 		} else {
+			// Hide all tasks that don't contain search term
 			$allTasks.addClass('hidden');
-			searchedItem.each( (index) => {
+			searchedItem.each((index) => {
 				$('textarea[id="task-' + searchedItem[index].val + '"]').parent().removeClass('hidden');
 			});
 		}
 	}
 
 	function incrementTaskCounter() {
+		// Task 'val' property setter
 		taskValInc++;
 	}
 
 	function debug() {
-		$tasks.each( (index) => {
-			console.log($tasks[index]);
-		});
+		// Logs each task object in the data array
+		$tasks.each((index) => { console.log($tasks[index]); });
 	}
 
 	function init(taskArray) {
@@ -169,13 +164,11 @@ var app = (function() {
 		    $searchField = $('#search-bar'),
 		    $searchButton = $('#search-button');
 
-		$tasks.each( (index) => {
-			createTask($tasks[index]);
-		});
+		$tasks.each((index) => { createTask($tasks[index]); });
 
 		// Add event listeners to static elements
-		$newTaskField.keypress( (e) => {
-			// keyCode 13 == ENTER
+		$newTaskField.keypress((e) => {
+			// keyCode 10 is Safari fallback
 			if(e.keyCode === 10 || e.keyCode === 13) {
 				e.preventDefault();
 				newTask();
@@ -183,14 +176,13 @@ var app = (function() {
 			}
 		});
 
-		$newTaskButton.click( (e) => {
+		$newTaskButton.click((e) => {
 			e.preventDefault();
 			newTask();
 			$newTaskField.focus();
 		});
 
-		$searchField.keypress( (e) => {
-			// keyCode 13 == ENTER
+		$searchField.keypress((e) => {
 			if(e.keyCode === 10 || e.keyCode === 13) {
 				e.preventDefault();
 				searchTask();
@@ -198,20 +190,16 @@ var app = (function() {
 			}
 		});
 
-		$searchButton.click( () => { searchTask(); });
-
+		$searchButton.click(() => { searchTask(); });
 		$newTaskField.focus();
 	}
-
 	init($tasks);
 
 	var publicAPI = {
-
 		newTask: newTask,
 		debug: debug
 	};
 
 	return publicAPI;
-
 
 })(jQuery);
