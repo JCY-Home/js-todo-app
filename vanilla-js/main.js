@@ -36,11 +36,11 @@ var app = (function() {
     })();
 
     // Data object
-	var taskValInc = tasks.length + 1,
-		tasks = [
+	var tasks = [
 			{'val': 1, 'task': 'Walk the chinchilla', 'complete': false},
 			{'val': 2, 'task': 'Shovel off the roof', 'complete': false},
-	    ];
+	    ],
+	    taskValInc = tasks.length + 1;
 
 	function createTask(taskObject) {
 		// Create complete or incomplete task depending on task object

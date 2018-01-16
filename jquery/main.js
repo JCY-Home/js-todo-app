@@ -16,11 +16,11 @@ var app = (function() {
 		};
 	})();
 
-	var taskValInc = $tasks.length + 1,
-		$tasks = $([
+	var $tasks = $([
 			{'val': 1, 'task': 'Invent new DNA base pairs', 'complete': false},
 			{'val': 2, 'task': 'Modernize the candle', 'complete': false},
-	    ]);
+	    ]),
+		taskValInc = $tasks.length + 1;
 
 	function createTask(taskObject) {
 		var $checkbox,
