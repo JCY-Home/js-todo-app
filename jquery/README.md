@@ -1,5 +1,4 @@
 **To-Do App (jQuery)**
-Jan 15, 2017
 
 - Uses some ES6 features
 
