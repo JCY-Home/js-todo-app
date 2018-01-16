@@ -1,5 +1,4 @@
 **To-Do App (Plain JS)**
-Jan 8 - 15, 2017
 
 - Uses some ES6 features
 

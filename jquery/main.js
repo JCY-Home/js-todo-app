@@ -39,7 +39,7 @@ var app = (function() {
 			$checkmark = $('<img class="checkmark" src="./img/checkmark.jpg"/>');
 		}
 
-		$textArea = $('<textarea id="task-' + taskObject.val + '" rows="1" cols="50" placeholder="Insert task name here..."></textarea>');
+		$textArea = $('<textarea id="task-' + taskObject.val + '" rows="1" cols="50" placeholder="Insert task name here..." spellcheck="false"></textarea>');
 		$textArea.text(() => { return taskObject.task; });
 		$removeButton = $('<div class="remove-button" title="Remove task">X</div>');
 

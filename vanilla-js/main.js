@@ -76,7 +76,7 @@ var app = (function() {
 		var textArea = document.createElement('textarea'),
 		    content = document.createTextNode(taskObject.task);
 
-		utils.setMultipleAttributes(textArea, {'id': 'task-' + taskObject.val, 'rows': '1', 'cols': '50', 'placeholder': 'Insert task name here...'});
+		utils.setMultipleAttributes(textArea, {'id': 'task-' + taskObject.val, 'rows': '1', 'cols': '50', 'placeholder': 'Insert task name here...', 'spellcheck': false});
 
 		if(taskObject.complete) {
 			// No editing completed tasks
@@ -149,7 +149,7 @@ var app = (function() {
 			newTaskObject = {'val': taskValInc, 'task': taskContent || newTaskText.value, 'complete': complete || false};
 
 		if(newTaskObject.task === '') {
-			newTaskObject.task = 'Blank task';
+			newTaskObject.task = 'New blank task';
 		}
 		
 		tasks.push(newTaskObject);
