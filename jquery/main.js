@@ -55,10 +55,8 @@ var app = (function() {
 		if(!taskObject.complete) {
 			$checkbox.click((e) => { createTask(completeTask(e)); });
 			$textArea.keypress((e) => { utils.preventEnterKey(e); });
-			$textArea.keyup(() => {
-				// Prevents DOM text from updating after every keystroke
-				clearTimeout(timeout);
-				timeout = setTimeout(() => { updateTask(taskObject.val, $textArea.val()); }, 500);
+			$textArea.change(() => {
+				updateTask(taskObject.val, $textArea.val());
 			});
 			// Build task lists
 			$taskList.append($container);
