@@ -104,7 +104,7 @@ var app = (function() {
 			textArea.addEventListener('keyup', () => {
 				clearTimeout(timeout);
 				// Prevents update from firing on every keystroke
-				timeout = setTimeout( () => { updateTask(textArea, taskObject.val, textArea.value); }, 500);
+				timeout = setTimeout( () => { updateTask(textArea, taskObject.val, textArea.value); }, 700);
 			});
 		} 
 
