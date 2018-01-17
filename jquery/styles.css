@@ -9,7 +9,7 @@ body {
 .app-wrap {
 	background-color: #efefef;
 	width: 80vw;
-	height: auto;
+	min-height: 94vh;
 	margin: 20px auto;
 	border: 1px solid #ccc;
 }
