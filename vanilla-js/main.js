@@ -15,7 +15,7 @@ var app = (function() {
 			    }
 			}
 		}
-
+		
 		function appendMultipleChildren(parentElem, childrenArray) {
 			childrenArray.map( (item) => {
 				parentElem.appendChild(item);
