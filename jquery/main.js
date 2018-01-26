@@ -25,27 +25,19 @@ var app = (function() {
 		    $checkmark,
 		    $textArea,
 		    $removeButton,
-		    timeout,
 		    $taskList = $('#task-list'),
 		    $completedList = $('#completed-list'),
 		    $container = $('<div class="task"></div>');
 
 		// Build task elements
-		if (!taskObject.complete) {
-			$checkbox = $('<div class="tr-checkbox" title="Complete task"></div>');
-			$checkmark = $('<img class="checkmark hidden" src="./img/checkmark.jpg"/>');
-		} else {
-			$checkbox = $('<div class="tr-checkbox hidden" title="Complete task"></div>');
-			$checkmark = $('<img class="checkmark" src="./img/checkmark.jpg"/>');
-		}
+		$checkbox = $('<div class="tr-checkbox" title="Complete task"></div>');
+	  $checkmark = $('<img class="checkmark" src="./img/checkmark.jpg"/>');
+	  
+	  !taskObject.complete ? $checkmark.addClass('hidden') : $checkbox.addClass('hidden');
 
 		$textArea = $(`<textarea id="task-${taskObject.val}" rows="1" cols="50" placeholder="Insert task name here..." spellcheck="false"></textarea>`);
 		$textArea.text(() => { return taskObject.task; });
 		$removeButton = $('<div class="remove-button" title="Remove task">X</div>');
-
-		if (taskObject.complete) {
-			$textArea.attr('readonly', 'readonly');
-		}
 
 		$container.append($checkbox, $checkmark, $textArea, $removeButton);
 
@@ -61,6 +53,7 @@ var app = (function() {
 			// Build task lists
 			$taskList.append($container);
 		} else {
+			$textArea.attr('readonly', 'readonly');
 			$completedList.append($container);
 		}
 	}
@@ -87,7 +80,7 @@ var app = (function() {
 			newTaskObject.task = 'New empty task';
 		}
 		$tasks.push(newTaskObject);
-		// Bracket notation gets raw DOM node from jQuery object
+		// Get raw DOM node for new task field and clear the value
 		$newField[0].value = '';
 		incrementTaskCounter();
 		createTask(newTaskObject);
@@ -97,6 +90,7 @@ var app = (function() {
 		var $thisTask,
 			  $target = $(e.target),
 		    $siblingTextarea = $target.siblings('textarea'),
+		    // Parse task number from ID
 		    idNumber = $siblingTextarea.attr('id').slice(5);
 
 		$.each($tasks, (index) => {
@@ -133,7 +127,7 @@ var app = (function() {
 		searchedItem = $tasks.filter( (index) => {
 			return $tasks[index].task.toUpperCase().indexOf($searchField.val().toUpperCase()) !== -1;
 		});
-		// Blank search removes filtered selection
+		// Blank search shows all tasks
 		if ($searchField.val() === '') {
 			$allTasks.removeClass('hidden');
 		} else if (searchedItem.length < 1) {
@@ -156,7 +150,7 @@ var app = (function() {
 	}
 
 	function debug() {
-		// Logs each task object in the data array
+		// Logs the task data array
 		$tasks.each((index) => { console.log($tasks[index]); });
 	}
 
