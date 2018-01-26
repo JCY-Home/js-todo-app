@@ -7,7 +7,7 @@ var app = (function() {
 
 	var utils = (function() {
 		function preventEnterKey(e) {
-			if(e.keyCode === 10 || e.keyCode === 13) {e.preventDefault();}
+			if (e.keyCode === 10 || e.keyCode === 13) {e.preventDefault();}
 		}
 		return {
 			preventEnterKey: preventEnterKey
@@ -15,10 +15,10 @@ var app = (function() {
 	})();
 
 	var $tasks = $([
-			{'val': 1, 'task': 'Invent new DNA base pairs', 'complete': false},
-			{'val': 2, 'task': 'Modernize the candle', 'complete': false},
+				{ 'val': 1, 'task': 'Invent new DNA base pairs', 'complete': false },
+				{ 'val': 2, 'task': 'Modernize the candle', 'complete': false },
 	    ]),
-		taskValInc = $tasks.length + 1;
+		  taskValInc = $tasks.length + 1;
 
 	function createTask(taskObject) {
 		var $checkbox,
@@ -31,7 +31,7 @@ var app = (function() {
 		    $container = $('<div class="task"></div>');
 
 		// Build task elements
-		if(!taskObject.complete) {
+		if (!taskObject.complete) {
 			$checkbox = $('<div class="tr-checkbox" title="Complete task"></div>');
 			$checkmark = $('<img class="checkmark hidden" src="./img/checkmark.jpg"/>');
 		} else {
@@ -39,11 +39,11 @@ var app = (function() {
 			$checkmark = $('<img class="checkmark" src="./img/checkmark.jpg"/>');
 		}
 
-		$textArea = $('<textarea id="task-' + taskObject.val + '" rows="1" cols="50" placeholder="Insert task name here..." spellcheck="false"></textarea>');
+		$textArea = $(`<textarea id="task-${taskObject.val}" rows="1" cols="50" placeholder="Insert task name here..." spellcheck="false"></textarea>`);
 		$textArea.text(() => { return taskObject.task; });
 		$removeButton = $('<div class="remove-button" title="Remove task">X</div>');
 
-		if(taskObject.complete) {
+		if (taskObject.complete) {
 			$textArea.attr('readonly', 'readonly');
 		}
 
@@ -52,7 +52,7 @@ var app = (function() {
 		// Add event listeners to dynamic elements
 		$removeButton.click((e) => { removeTask(e); });
 
-		if(!taskObject.complete) {
+		if (!taskObject.complete) {
 			$checkbox.click((e) => { createTask(completeTask(e)); });
 			$textArea.keypress((e) => { utils.preventEnterKey(e); });
 			$textArea.change(() => {
@@ -67,11 +67,11 @@ var app = (function() {
 
 	function updateTask(objectVal, newText) {
 		var $thisTask,
-			$thisTaskTextarea = $('textarea[id="task-' + objectVal + '"]');
+			  $thisTaskTextarea = $(`textarea[id="task-${objectVal}"]`);
 
 		// Sets data array text
 		$.each($tasks, (index) => {
-			if($tasks[index].val === objectVal) { $thisTask = $tasks[index]; }
+			if ($tasks[index].val === objectVal) { $thisTask = $tasks[index]; }
 		});
 		$thisTask.task = newText;
 		// Sets DOM text
@@ -80,10 +80,10 @@ var app = (function() {
 
 	function newTask(taskString, bool) {
 	    var $newField = $('.new-field'),
-			newTaskObject = {'val': taskValInc, 'task': taskString || $newField.val(), 'complete': bool || false};
+			    newTaskObject = { 'val': taskValInc, 'task': taskString || $newField.val(), 'complete': bool || false };
 
 		// Doesn't let new tasks be blank
-		if(newTaskObject.task === '') {
+		if (newTaskObject.task === '') {
 			newTaskObject.task = 'New empty task';
 		}
 		$tasks.push(newTaskObject);
@@ -95,12 +95,12 @@ var app = (function() {
 
 	function completeTask(e) {
 		var $thisTask,
-			$target = $(e.target),
+			  $target = $(e.target),
 		    $siblingTextarea = $target.siblings('textarea'),
 		    idNumber = $siblingTextarea.attr('id').slice(5);
 
 		$.each($tasks, (index) => {
-			if($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
+			if ($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
 		});
 		$thisTask.complete = true;
 		$target.parent().remove();
@@ -110,12 +110,12 @@ var app = (function() {
 
 	function removeTask(e) {
 		var $thisTask,
-			$target = $(e.target),
+			  $target = $(e.target),
 		    $siblingTextareaId = $target.siblings('textarea').attr('id'),
 		    idNumber = $siblingTextareaId.slice(5);
 
 		$.each($tasks, (index) => {
-			if($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
+			if ($tasks[index].val === Number(idNumber)) { $thisTask = $tasks[index]; }
 		});
 		// Remove task from data array
 		$tasks.splice($.inArray($thisTask, $tasks), 1);
@@ -126,7 +126,7 @@ var app = (function() {
 	function searchTask() {
 		var searchedItem,
 		    timeout,
-			$allTasks = $('.task'),
+			  $allTasks = $('.task'),
 		    $searchField = $('#search-bar'),
 		    $failText = $('.fail-text');
 		// Ignores capitalization
@@ -134,18 +134,18 @@ var app = (function() {
 			return $tasks[index].task.toUpperCase().indexOf($searchField.val().toUpperCase()) !== -1;
 		});
 		// Blank search removes filtered selection
-		if($searchField.val() === '') {
+		if ($searchField.val() === '') {
 			$allTasks.removeClass('hidden');
-		} else if(searchedItem.length < 1) {
+		} else if (searchedItem.length < 1) {
 			// No match will show a text warning
-			$failText.animate({'opacity': 1}, 500);
+			$failText.animate({ 'opacity': 1 }, 500);
 			clearTimeout(timeout);
-			timeout = setTimeout(() => { $failText.animate({'opacity': 0}, 500); }, 3000);
+			timeout = setTimeout(() => { $failText.animate({ 'opacity': 0 }, 500); }, 3000);
 		} else {
 			// Hide all tasks that don't contain search term
 			$allTasks.addClass('hidden');
 			searchedItem.each((index) => {
-				$('textarea[id="task-' + searchedItem[index].val + '"]').parent().removeClass('hidden');
+				$(`textarea[id="task-${ searchedItem[index].val }"]`).parent().removeClass('hidden');
 			});
 		}
 	}
@@ -160,7 +160,7 @@ var app = (function() {
 		$tasks.each((index) => { console.log($tasks[index]); });
 	}
 
-	function init(taskArray) {
+	(function init(taskArray) {
 		var $newTaskField = $('.new-field'),
 		    $newTaskButton = $('.tr-button'),
 		    $searchField = $('#search-bar'),
@@ -171,7 +171,7 @@ var app = (function() {
 		// Add event listeners to static elements
 		$newTaskField.keypress((e) => {
 			// keyCode 10 is Safari fallback
-			if(e.keyCode === 10 || e.keyCode === 13) {
+			if (e.keyCode === 10 || e.keyCode === 13) {
 				e.preventDefault();
 				newTask();
 				$newTaskField.focus();
@@ -185,7 +185,7 @@ var app = (function() {
 		});
 
 		$searchField.keypress((e) => {
-			if(e.keyCode === 10 || e.keyCode === 13) {
+			if (e.keyCode === 10 || e.keyCode === 13) {
 				e.preventDefault();
 				searchTask();
 				$searchField.focus();
@@ -194,12 +194,11 @@ var app = (function() {
 
 		$searchButton.click(() => { searchTask(); });
 		$newTaskField.focus();
-	}
-	init($tasks);
+	})($tasks);
 
 	var publicAPI = {
-		newTask: newTask,
-		debug: debug
+			newTask: newTask,
+			debug: debug
 	};
 
 	return publicAPI;
